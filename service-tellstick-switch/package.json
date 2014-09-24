@@ -1,0 +1,15 @@
+{
+  "name": "service-telstick-switch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Camilo Tapia <camilo.tapia@gmail.com> (http://www.1001.io/)",
+  "license": "MIT",
+  "dependencies": {
+    "zmq": "^2.8.0",
+    "zonar": "^0.5.9"
+  }
+}
