@@ -1,5 +1,6 @@
 var zonar = require('zonar');
 var zmq = require('zmq');
+var moment = require('moment');
 var config = require('./config');
 
 var z = zonar.create({ net : 'cammes', name: 'control.espresso'});
@@ -8,6 +9,8 @@ var outgoingService;
 
 var mac = config.espresso;
 var currentState = "";
+
+console.log('\033[2J');
 
 z.start(function(){
 
@@ -40,7 +43,8 @@ z.start(function(){
 
             if (newState != currentState) {
 
-                console.log("new state: '%s'", newState);
+                var time = moment().format("DD/MM HH:SS");
+                console.log("Espresso [%s]> new state: %s ", time, newState);
 
                 currentState = newState;
 
@@ -57,7 +61,8 @@ z.start(function(){
             }
 
         } else {
-            console.log("No plugwise service");
+            var time = moment().format("DD/MM HH:SS");
+            console.log("Espresso [%s]> no plugwise service", time);
         }
         setTimeout(react, 1000 * 60);
 

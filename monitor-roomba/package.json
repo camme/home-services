@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "zonar": "^0.5.9",
-    "zmq": "^2.8.0"
+    "zmq": "^2.8.0",
+    "moment": "^2.8.3"
   }
 }

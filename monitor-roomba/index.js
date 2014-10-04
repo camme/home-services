@@ -1,8 +1,12 @@
 var zonar = require('zonar');
 var zmq = require('zmq');
+var moment = require('moment');
 var z = zonar.create({ net : 'cammes', name: 'roomba.monitor'});
 var zocketIncoming = zmq.socket('sub');
 var pushbulletService;
+
+console.log('\033[2J');
+console.log('Roomba');
 
 z.start(function(){
 
@@ -86,7 +90,10 @@ z.start(function(){
                 message: message
             };
             pushbulletSocket.send(JSON.stringify(outMessage));
-            console.log("SEND", outMessage);
+
+            var time = moment().format("DD/MM HH:SS");
+            console.log("Roomba [%s]> %s", time, outMessage);
+
         }
 
     };

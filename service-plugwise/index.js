@@ -5,6 +5,7 @@
 var zmq = require('zmq');
 var zonar = require('zonar');
 var async = require('async');
+var moment = require('moment');
 var plugwiseApi = require('plugwisejs');
 
 var port = 6100;
@@ -31,7 +32,10 @@ function scanlist(socket, done) {
                 if (cache[mac] != info.watt) {
                     var message = { watt: info.watt, first: first };
                     socket.send(mac + " " + JSON.stringify(message) );
-                    console.log(mac + " " + JSON.stringify(message) );
+
+                    var time = moment().format("DD/MM HH:SS");
+                    console.log("Plugwise [%s]> consumtion %s = %s", time, mac, message.watt);
+                    //console.log(mac + " " + JSON.stringify(message) );
                 }
                 cache[mac] = info.watt;
             }
@@ -70,7 +74,8 @@ zpub.bind(pubAddress, function(err) {
             var mac = data[0];
             var command = data[1];
 
-            console.log('GOT', mac, command);
+            var time = moment().format("DD/MM HH:SS");
+            console.log("Plugwise [%s]> GOT %s %s", time, mac, command);
 
             if (command && mac) {
 

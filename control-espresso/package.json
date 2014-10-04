@@ -10,6 +10,7 @@
   "license": "MIT",
   "dependencies": {
     "zmq": "^2.8.0",
-    "zonar": "^0.5.9"
+    "zonar": "^0.5.9",
+    "moment": "^2.8.3"
   }
 }
