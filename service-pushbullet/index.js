@@ -4,13 +4,14 @@
 
 var zmq = require('zmq');
 var zonar = require('zonar');
+var async = require('async');
 var config = require('./config');
 var PushBullet = require('pushbullet');
 
 var pusher = new PushBullet(config.token);
-var port = 6000;
+var port = 6060;
 var address = "tcp://0.0.0.0:" + port;
-var broadcaster = zonar.create({ net: "cammes", name: "pushbullet.pub", payload: JSON.stringify({ port: port }) });
+var broadcaster = zonar.create({ net: "cammes", name: "pushbullet.rep", payload: JSON.stringify({ port: port }) });
 var zocket = zmq.socket('rep');
 
 pusher.devices(function(error, response) {
@@ -38,11 +39,16 @@ function startZocket(devices) {
                 var event = JSON.parse(data.toString('utf8'));
 
                 if (event.type == "note") {
-                    devices.forEach(function(device) {
+                    async.eachSeries(devices, function(device, next) {
                         pusher.note(device.iden, event.title, event.message, function(error, response) {
-                            zocket.send(err ? JSON.stringify(err) : '');
+                            next(err);
                         }); 
+                    }, function(err) {
+                        zocket.send(err ? JSON.stringify(err) : 'OK');
+                        console.log("SEND", event.title, event.message);
                     });
+                } else {
+                    zocket.send("NOT OK, WRONG TYPE");
                 }
 
             } catch(err) {

@@ -1,0 +1,15 @@
+{
+  "name": "monitor-bash",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "zonar": "^0.5.9",
+    "cli-color": "^0.3.2"
+  }
+}

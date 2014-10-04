@@ -1,5 +1,5 @@
 {
-  "name": "service-pushbullet",
+  "name": "service-espresso",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,9 +9,7 @@
   "author": "Camilo Tapia <camilo.tapia@gmail.com> (http://www.1001.io/)",
   "license": "MIT",
   "dependencies": {
-    "pushbullet": "^1.3.0",
     "zmq": "^2.8.0",
-    "zonar": "^0.5.9",
-    "async": "^0.9.0"
+    "zonar": "^0.5.9"
   }
 }
